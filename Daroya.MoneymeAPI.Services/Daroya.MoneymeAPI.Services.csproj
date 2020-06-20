@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Daroya.MoneymeAPI.Database\Daroya.MoneymeAPI.Database.csproj" />
+    <ProjectReference Include="..\Daroya.MoneymeAPI.Models\Daroya.MoneymeAPI.Models.csproj" />
+  </ItemGroup>
+
+</Project>
