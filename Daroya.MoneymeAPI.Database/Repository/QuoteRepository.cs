@@ -38,6 +38,9 @@ namespace Daroya.MoneymeAPI.Database.Repository
                     };
                     _moneyMeContext.Quotes.Add(quote);
                     _moneyMeContext.SaveChanges();
+
+                    CheckLimitQuoteRecordsInDb();
+
                     return quote.Id;
                 }
                 throw new Exception(string.Format("Creating quote for {0} {1}", newQuote.FirstName, newQuote.LastName));
@@ -69,6 +72,17 @@ namespace Daroya.MoneymeAPI.Database.Repository
             }
 
             return quoteDTO;
+        }
+
+        // DEPLOYING APP ON SERVER, MAKING SURE TO LIMIT RECORDS ON SQL LITE
+        private void CheckLimitQuoteRecordsInDb()
+        {
+            if (_moneyMeContext.Quotes.Count() > 100)
+            {
+                var quoteToDelete = _moneyMeContext.Quotes.OrderBy(m => m.CreatedDate).FirstOrDefault();
+                _moneyMeContext.Quotes.Remove(quoteToDelete);
+                _moneyMeContext.SaveChanges();
+            }
         }
 
 

@@ -25,5 +25,11 @@
     <ProjectReference Include="..\Daroya.MoneymeAPI.Services\Daroya.MoneymeAPI.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="moneyme.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 </Project>
