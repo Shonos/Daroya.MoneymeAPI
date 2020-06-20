@@ -1,5 +1,6 @@
 #docker build -t daroya.moneymeapi .
 #docker run -d -p 8080:80 --name myapp daroya.moneymeapi
+#docker tag daroya.moneymeapi registry.heroku.com/daroya-moneymeapi/web
 #docker push registry.heroku.com/daroya-moneymeapi/web
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
