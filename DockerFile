@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+WORKDIR /app
+
+# Copy csproj and restore as distinct layers
+COPY Daroya.MoneymeAPI/Daroya.MoneymeAPI.csproj ./Daroya.MoneymeAPI/
+COPY Daroya.MoneymeAPI.Database/Daroya.MoneymeAPI.Database.csproj ./Daroya.MoneymeAPI.Database/
+COPY Daroya.MoneymeAPI.Models/Daroya.MoneymeAPI.Models.csproj ./Daroya.MoneymeAPI.Models/
+COPY Daroya.MoneymeAPI.Services/Daroya.MoneymeAPI.Services.csproj ./Daroya.MoneymeAPI.Services/
+COPY Daroya.MoneymeAPI/moneyme.db ./Daroya.MoneymeAPI/
+RUN dotnet restore ./Daroya.MoneymeAPI/Daroya.MoneymeAPI.csproj
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "Daroya.MoneymeAPI.dll"]
