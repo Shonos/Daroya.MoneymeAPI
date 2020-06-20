@@ -20,8 +20,9 @@ namespace Daroya.MoneymeAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                    webBuilder.UseKestrel(options => options.ListenAnyIP(Int32.Parse(System.Environment.GetEnvironmentVariable("PORT"))));
+                    var port = Environment.GetEnvironmentVariable("PORT");
+                    webBuilder.UseStartup<Startup>()
+                    .UseUrls("http://*:" + port);
                 });
     }
 }
