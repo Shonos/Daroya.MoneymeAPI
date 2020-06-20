@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace Daroya.MoneymeAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]/[action]")]
     public class QuoteController : ControllerBase
     {
         private readonly ILogger<QuoteController> _logger;
