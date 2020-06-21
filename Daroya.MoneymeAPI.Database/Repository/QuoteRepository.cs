@@ -67,7 +67,8 @@ namespace Daroya.MoneymeAPI.Database.Repository
                                 LastName = q.LastName,
                                 Mobile = q.Mobile,
                                 Term = q.Term,
-                                Title = q.Title
+                                Title = q.Title,
+                                Amount = q.Amount
                             }).FirstOrDefault();
             }
 

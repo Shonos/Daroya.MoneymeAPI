@@ -43,6 +43,19 @@ namespace Daroya.MoneymeAPI
             services.AddScoped<IQuoteService, QuoteService>();
             services.AddScoped<IQuoteRepository, QuoteRepository>();
 
+            services.AddCors(
+                options =>
+                {
+                    options.AddPolicy("ServicesPolicy", builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .WithExposedHeaders("Content-Disposition");
+                    });
+                }
+            );
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -72,6 +85,8 @@ namespace Daroya.MoneymeAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("ServicesPolicy");
 
             app.UseAuthorization();
 

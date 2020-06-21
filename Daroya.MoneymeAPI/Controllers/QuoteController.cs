@@ -26,5 +26,11 @@ namespace Daroya.MoneymeAPI.Controllers
         {
             return _quoteService.CreateQuote(request);
         }
+
+        [HttpGet]
+        public GetQuoteResponse GetQuote(Guid quoteId)
+        {
+            return _quoteService.GetQuote(quoteId);
+        }
     }
 }

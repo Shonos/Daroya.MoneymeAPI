@@ -1,4 +1,5 @@
 ﻿using Daroya.MoneymeAPI.Database.Repository;
+using Daroya.MoneymeAPI.Models.Models.DTO;
 using Daroya.MoneymeAPI.Models.Models.Responses;
 using Daroya.MoneymeAPI.Models.Requests;
 using System;
@@ -25,6 +26,26 @@ namespace Daroya.MoneymeAPI.Services
                 response.RedirectUrl = _configService.GetWebAppUrl() + "quote?id=" + newQuoteId.ToString();
             }
             catch(Exception e)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessage = e.Message;
+            }
+            return response;
+        }
+
+        public GetQuoteResponse GetQuote(Guid id)
+        {
+            var response = new GetQuoteResponse();
+            try
+            {
+                response.Quote = _quoteRepository.GetQuote(id);
+                if (response.Quote == null)
+                {
+                    throw new Exception(string.Format("Error loading quote with id {0}", id));
+                }
+                response.IsSuccess = true;
+            }
+            catch (Exception e)
             {
                 response.IsSuccess = false;
                 response.ErrorMessage = e.Message;
