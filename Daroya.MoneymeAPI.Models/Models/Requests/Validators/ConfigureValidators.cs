@@ -12,6 +12,7 @@ namespace Daroya.MoneymeAPI.Models.Models.Requests.Validators
         public static void Configure(IServiceCollection services)
         {
             services.AddSingleton<IValidator<CreateQuoteRequest>, CreateQuoteRequestValidator>();
+            services.AddSingleton<IValidator<EditQuoteAndSaveRequest>, EditQuoteRequestValidator>();
         }
     }
 }
