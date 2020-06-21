@@ -75,6 +75,31 @@ namespace Daroya.MoneymeAPI.Database.Repository
             return quoteDTO;
         }
 
+        public void EditQuoteAndSave(QuoteDTO quote)
+        {
+            if (quote != null)
+            {
+                var entity = _moneyMeContext.Quotes.SingleOrDefault(b => b.Id == quote.Id);
+                if (entity != null)
+                {
+                    entity.Amount = quote.Amount;
+                    entity.Email = quote.Email;
+                    entity.FirstName = quote.FirstName;
+                    entity.LastName = quote.LastName;
+                    entity.LastUpdatedBy = Guid.Empty;
+                    entity.LastUpdatedByName = "SYSTEM";
+                    entity.LastUpdatedDate = DateTime.UtcNow;
+                    entity.Mobile = quote.Mobile;
+                    entity.Term = quote.Term;
+                    entity.Title = quote.Title;
+                    entity.EstablishmentFee = quote.EstablishmentFee;
+                    entity.Repayments = quote.Repayments;
+                    entity.TotalInterest = quote.TotalInterest;
+                    _moneyMeContext.SaveChanges();
+                }
+            }
+        }
+
         // DEPLOYING APP ON SERVER, MAKING SURE TO LIMIT RECORDS ON SQL LITE
         private void CheckLimitQuoteRecordsInDb()
         {

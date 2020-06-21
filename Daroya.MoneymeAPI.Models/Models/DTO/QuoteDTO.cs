@@ -14,5 +14,9 @@ namespace Daroya.MoneymeAPI.Models.Models.DTO
         public string Mobile { get; set; }
         public string Email { get; set; }
         public decimal Amount { get; set; }
+
+        public decimal Repayments { get; set; }
+        public decimal EstablishmentFee { get; set; }
+        public decimal TotalInterest { get; set; }
     }
 }

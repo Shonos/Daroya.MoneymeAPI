@@ -32,5 +32,11 @@ namespace Daroya.MoneymeAPI.Controllers
         {
             return _quoteService.GetQuote(quoteId);
         }
+
+        [HttpPost]
+        public EditQuoteAndSaveResponse EditQuoteAndSave(EditQuoteAndSaveRequest request)
+        {
+            return _quoteService.EditQuoteAndSave(request);
+        }
     }
 }

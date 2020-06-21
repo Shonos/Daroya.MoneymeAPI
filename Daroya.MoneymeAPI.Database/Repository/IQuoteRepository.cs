@@ -8,5 +8,6 @@ namespace Daroya.MoneymeAPI.Database.Repository
     {
         QuoteDTO GetQuote(Guid quoteId);
         Guid CreateQuote(QuoteDTO newQuote);
+        void EditQuoteAndSave(QuoteDTO quote);
     }
 }

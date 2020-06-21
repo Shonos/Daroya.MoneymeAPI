@@ -9,5 +9,6 @@ namespace Daroya.MoneymeAPI.Services
     {
         CreateQuoteResponse CreateQuote(CreateQuoteRequest request);
         GetQuoteResponse GetQuote(Guid id);
+        EditQuoteAndSaveResponse EditQuoteAndSave(EditQuoteAndSaveRequest request);
     }
 }

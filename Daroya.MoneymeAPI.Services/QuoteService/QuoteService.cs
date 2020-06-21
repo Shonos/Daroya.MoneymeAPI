@@ -23,7 +23,7 @@ namespace Daroya.MoneymeAPI.Services
             {
                 var newQuoteId = _quoteRepository.CreateQuote(request.Quote);
                 response.IsSuccess = true;
-                response.RedirectUrl = _configService.GetWebAppUrl() + "quote?id=" + newQuoteId.ToString();
+                response.RedirectUrl = _configService.GetWebAppUrl() + "quote/calculator?id=" + newQuoteId.ToString();
             }
             catch(Exception e)
             {
@@ -31,6 +31,30 @@ namespace Daroya.MoneymeAPI.Services
                 response.ErrorMessage = e.Message;
             }
             return response;
+        }
+
+        public EditQuoteAndSaveResponse EditQuoteAndSave(EditQuoteAndSaveRequest request)
+        {
+            var response = new EditQuoteAndSaveResponse();
+            try
+            {
+                if (request?.Quote?.Id != null)
+                {
+                    _quoteRepository.EditQuoteAndSave(request.Quote);
+                    response.IsSuccess = true;
+                }
+                else
+                {
+                    throw new Exception(string.Format("Error updating quote"));
+                }
+            }
+            catch (Exception e)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessage = e.Message;
+            }
+            return response;
+
         }
 
         public GetQuoteResponse GetQuote(Guid id)
@@ -52,5 +76,7 @@ namespace Daroya.MoneymeAPI.Services
             }
             return response;
         }
+
+        
     }
 }
